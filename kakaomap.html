@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Kakao 지도 시작하기</title>
+</head>
+<body>
+	<div id="map" style="width:840px;height:840px;"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=93e8cac61f26e560f86fd96315c58ea1"></script>
+    <input id="number1" type='number'>
+    <input id="number2" type='number'>
+    <input class="run" type='submit' onclick="mapmake();">
+	<script>
+        var latitude;
+        var longitude;
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            latitude = pos.coords.latitude;
+            longitude = pos.coords.longitude;
+            console.log(latitude, longitude);
+            var container = document.getElementById('map');
+            var options = {
+                center: new kakao.maps.LatLng(latitude, longitude),
+                level: 6
+            };
+            var map = new kakao.maps.Map(container, options);
+        });
+        async function mapmake(){
+            const x = document.getElementById('number1').value;
+            const y = document.getElementById('number2').value;
+            var container = document.getElementById('map');
+            var options = {
+                center: new kakao.maps.LatLng(x, y),
+                level: 7
+            };
+            var map = new kakao.maps.Map(container, options);
+        };
+	</script>
+</body>
+</html>
