@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const Cafeteria = () => {
   const getApi = async () => {
-    const response = await fetch('/api/cafes', {
+    const response = await fetch('api/cafes', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
