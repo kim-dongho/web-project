@@ -1,12 +1,11 @@
-// app.js
-
-// [LOAD PACKAGES]
 var express     = require('express');
 var app         = express();
 var bodyParser  = require('body-parser');
 var mongoose    = require('mongoose');
+var Shop = require('./models/shop');
 // CONNECT TO MONGODB SERVER
 var db = mongoose.connection;
+var router = require('./routes')(app, Shop);
 db.on('error', console.error);
 db.once('open', function(){
     // CONNECTED TO MONGODB SERVER
@@ -22,11 +21,6 @@ mongoose.connect('mongodb://node:5317797q@15.165.124.23:50864/admin',{
         console.log('mongodb connect');
 });
 
-db.collection("shop").find({}, function(err, result) {
-    if (err) throw err;
-    console.log(result.가맹점명);
-});
-
 // [CONFIGURE APP TO USE bodyParser]
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -35,6 +29,7 @@ app.use(bodyParser.json());
 var port = process.env.PORT || 3000;
 
 // [CONFIGURE ROUTER]
+var router = require('./routes')(app)
 
 // [RUN SERVER]
 var server = app.listen(port, function(){
