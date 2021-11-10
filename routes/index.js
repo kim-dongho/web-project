@@ -13,7 +13,7 @@ module.exports = function(app, Shop)
 
     // GET
     app.get('/api/shops/:shops_area', function(req, res){
-        Shop.find({시도명: req.params.shops_area}, function(err, shop){
+        Shop.find({시군구명: {$regex:req.params.shops_area}}, function(err, shop){
             if(err) return res.status(500).json({error: err});
             if(!shop) return res.status(404).json({error: 'book not found'});
             res.json(shop);
