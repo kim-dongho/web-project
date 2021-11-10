@@ -13,9 +13,9 @@ function App() {
         </header>
         <main>
           <Location />
+          <Cafeteria />
         </main>
       </div>
-      <Cafeteria />
     </>
   );
 }

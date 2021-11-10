@@ -1,9 +1,8 @@
 /*global kakao*/
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Location = () => {
+const Location = ({ cafeData }) => {
   let locPosition = ''; // 좌표
-
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       function (position) {
@@ -36,11 +35,13 @@ const Location = () => {
     });
     marker.setMap(map);
   }, []);
-
+  console.log(cafeData);
   return (
-    <div>
-      <div id='map' style={{ width: '500px', height: '400px' }}></div>
-    </div>
+    <>
+      <div>
+        <div id='map' style={{ width: '500px', height: '400px' }}></div>
+      </div>
+    </>
   );
 };
 
