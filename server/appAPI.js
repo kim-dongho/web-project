@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Shop = require('./models/shop');
 // CONNECT TO MONGODB SERVER
 const db = mongoose.connection;
-const router = require('./routes')(app, Shop);
+const router = require('./routes/getData')(app, Shop);
 db.on('error', console.error);
 db.once('open', function () {
   // CONNECTED TO MONGODB SERVER

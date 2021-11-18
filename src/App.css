@@ -13,16 +13,40 @@ body {
 }
 
 header {
-  height: 10%;
+  height: 80vh;
   width: 100%;
   display: flex;
   justify-content: center;
-  position: fixed;
   border-bottom: 1px solid #ccc;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('./img/background.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-
+.navbar {
+  height: 10%;
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar__logo {
+  margin-left: 10%;
+}
+.navbar__item {
+  margin-right: 10%;
+}
+.navbar__item li {
+  float: left;
+  list-style: none;
+  margin-right: 40px;
+}
 main {
-  height: auto;
-  width: auto;
-  padding-top: 110px;
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background-color: #ccc;
+  align-items: center;
+  justify-content: center;
 }
