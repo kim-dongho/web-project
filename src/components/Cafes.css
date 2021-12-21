@@ -61,3 +61,28 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.cafe__info {
+  font-weight: bold;
+  font-size: 34px;
+}
+.cafe__count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cafe__conv {
+  margin: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .cafe__info {
+    font-size: 26px;
+  }
+  .cafe__count {
+    flex-direction: column;
+    line-height: 5px;
+  }
+  .wrap {
+  }
+}

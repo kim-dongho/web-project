@@ -1,12 +1,20 @@
 /*global kakao*/
-import React, { useEffect, Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Cafes.css';
 import restaurantImg from '../img/restaurant.jpg';
 import convenienceImg from '../img/convenience.jpg';
 import canteenImg from '../img/canteen.jpg';
 import breadImg from '../img/bread.jpg';
 const Cafes = ({ cafeteria, myLat, myLon }) => {
+  const [convenienceCnt, setConvenienceCnt] = useState(0);
+  const [restaurantCnt, setRestaurantCnt] = useState(0);
+  const [canteenCnt, setCanteenCnt] = useState(0);
+  const [breadCnt, setBreadCnt] = useState(0);
   const makescript = () => {
+    let convenience = 0,
+      restaurant = 0,
+      canteen = 0,
+      bread = 0;
     const container = document.getElementById('map');
     const options = {
       center: new kakao.maps.LatLng(myLat, myLon),
@@ -14,7 +22,10 @@ const Cafes = ({ cafeteria, myLat, myLon }) => {
     };
 
     const map = new kakao.maps.Map(container, options);
-
+    const myLocationMarker = new kakao.maps.Marker({
+      map: map,
+      position: options.center,
+    });
     cafeteria.forEach((el) => {
       let marker;
       const overlay = new kakao.maps.CustomOverlay();
@@ -57,6 +68,7 @@ const Cafes = ({ cafeteria, myLat, myLon }) => {
         el['가맹점명'].indexOf('씨유') !== -1 ||
         el['가맹점명'].indexOf('마트') !== -1
       ) {
+        convenience++;
         let imageSrc = convenienceImg,
           imageSize = new kakao.maps.Size(30, 47);
         let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
@@ -74,6 +86,7 @@ const Cafes = ({ cafeteria, myLat, myLon }) => {
         el['가맹점명'].indexOf('홍루이젠') !== -1 ||
         el['가맹점명'].indexOf('앤티앤스') !== -1
       ) {
+        bread++;
         let imageSrc = breadImg,
           imageSize = new kakao.maps.Size(46, 54);
 
@@ -86,6 +99,7 @@ const Cafes = ({ cafeteria, myLat, myLon }) => {
         });
         // 무료급식소
       } else if (el['가맹점유형코드'] === 4) {
+        canteen++;
         let imageSrc = canteenImg,
           imageSize = new kakao.maps.Size(56, 62);
         let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
@@ -97,6 +111,7 @@ const Cafes = ({ cafeteria, myLat, myLon }) => {
         });
         // 나머지 (식당)
       } else {
+        restaurant++;
         let imageSrc = restaurantImg,
           imageSize = new kakao.maps.Size(48, 54);
         let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
@@ -122,6 +137,10 @@ const Cafes = ({ cafeteria, myLat, myLon }) => {
         closeOverlay();
       });
     });
+    setConvenienceCnt(convenience);
+    setRestaurantCnt(restaurant);
+    setCanteenCnt(canteen);
+    setBreadCnt(bread);
     function makeOverListener(map, marker, infowindow) {
       return function () {
         infowindow.open(map, marker);
@@ -135,14 +154,19 @@ const Cafes = ({ cafeteria, myLat, myLon }) => {
       };
     }
   };
-
   useEffect(() => {
     makescript();
   }, [cafeteria]);
-
   return (
     <>
-      <div id='map' style={{ width: '80%', height: '80vh' }}></div>
+      <div className='cafe__info'>주변 사용처</div>
+      <div className='cafe__count'>
+        <div className='cafe__conv'>편의점 : {convenienceCnt}개</div>
+        <div className='cafe__conv'>빵집 : {breadCnt}개</div>
+        <div className='cafe__conv'>식당 : {restaurantCnt}개</div>
+        <div className='cafe__conv'>무료급식소 : {canteenCnt}개</div>
+      </div>
+      <div id='map' style={{ width: '80%', height: '70vh' }}></div>
     </>
   );
 };

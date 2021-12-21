@@ -13,7 +13,7 @@ db.once('open', function () {
 });
 
 mongoose.connect(
-  'mongodb://node:5317797q@15.165.124.23:50864/admin',
+  'mongodb://node:5317797q@3.35.50.183:55664/admin',
   {
     dbName: 'foodcardshop',
   },
